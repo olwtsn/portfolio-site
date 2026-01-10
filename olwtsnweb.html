@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oluwatosin Raji | Data Science & Cloud Portfolio</title>
+    <!-- Use Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+        .project-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .project-card:hover .project-title {
+            @apply text-orange-600;
+        }
+    </style>
+</head>
+<body class="bg-[#fbfdfe] text-slate-700">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 bg-white shadow-lg z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-gray-800">Oluwatosin Raji</a>
+            <div class="flex items-center space-x-4 text-sm font-medium">
+                <a href="#about" class="text-gray-600 hover:text-orange-600 transition-colors">About</a>
+                <a href="#projects" class="text-gray-600 hover:text-orange-600 transition-colors">Projects</a>
+                <a href="#contact" class="text-gray-600 hover:text-orange-600 transition-colors">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 mt-8">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-20 px-4 md:py-32">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                Cloud Data Scientist - Marketing
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                I'm all about using data to build cool, automated solutions in the cloud. I like solving interesting problems and bringing innovative projects to life, just for the fun of it.
+            </p>
+            <a href="#projects" class="inline-block px-8 py-3 rounded-lg bg-orange-500 text-white font-bold text-lg shadow-lg hover:bg-orange-600 transition-colors">
+                Explore My Work
+            </a>
+        </section>
+
+        <hr class="border-t-2 border-slate-300 my-16">
+
+        <!-- About Section -->
+        <section id="about" class="py-16 px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-12 max-w-5xl mx-auto">
+                <!-- Image Column -->
+                <div class="flex-shrink-0 mb-8 md:mb-0 md:w-1/3">
+                    <img src="https://olwtsn.cloud/olwtsn_website_photo.png" alt="A professional headshot of Oluwatosin Raji" class="rounded-xl shadow-xl w-full h-auto object-cover transform rotate-0 hover:rotate-2 transition-transform duration-300">
+                </div>
+                <!-- Text Column -->
+                <div class="prose text-center md:text-left md:w-2/3">
+                    <p class="text-lg text-slate-700">
+                        I’ve always been fascinated by how data can be used to build exciting and useful things. My journey has been all about taking raw data and turning it into something you can actually use. Right now, the big focus is on building automated solutions on the cloud.
+                    </p>
+                    <p class="text-lg text-slate-700 mt-4">
+                        For me, it’s not just about solving problems, but about the joy of creating something from scratch and seeing it work. I love diving into a new challenge and building projects that are both fun to make and a clear showcase of what's possible with data and cloud tools.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-slate-300 my-16">
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-16 px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">My Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: This Portfolio Website -->
+                <a href="#" class="project-card block p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl hover:bg-slate-100 hover:-translate-y-4 hover:rotate-0.5">
+                    <div class="flex items-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <h3 class="project-title text-xl font-bold ml-4 text-slate-800 transition-colors">This Portfolio Website</h3>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        A clean, single-page portfolio built with HTML, CSS, JavaScript and Gemini code assist. The entire site is hosted on Google Cloud as a static website.
+                    </p>
+                    <span class="inline-flex items-center bg-blue-200 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">
+                        <!-- Cloud Icon for GCP -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4c-3.72 0-6.73 2.76-7.35 6.35C2.65 10.77 1 12.39 1 14.5c0 2.48 2.02 4.5 4.5 4.5h14c2.48 0 4.5-2.02 4.5-4.5 0-2.07-1.42-3.84-3.65-4.46z"/></svg>
+                        GCP Cloud Storage
+                    </span>
+                    <span class="inline-flex items-center bg-green-200 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">
+                        <!-- Code Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                        HTML/CSS
+                    </span>
+                    <span class="inline-flex items-center bg-yellow-200 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                        <!-- Server Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M4 11h16v2H4zm0 2H2V7h2V5h16v2h2v4h-2v2zM6 9h2v2H6zm-2 0h-2v2h2v-2zM4 15h16v2H4zm0-2h-2v2h2v-2zm-2 2h2v2h-2v-2z"/></svg>
+                        Cloud DNS
+                    </span>
+                </a>
+
+                <!-- Project 2: Wordle Optimizer -->
+                <a href="https://wordle.olwtsn.cloud" target="_blank" class="project-card block p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl hover:bg-slate-100 hover:-translate-y-4 hover:rotate-0.5">
+                    <div class="flex items-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-orange-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <h3 class="project-title text-xl font-bold ml-4 text-slate-800 transition-colors">Wordle Optimizer</h3>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        A data analytics project that calculates the best starting word for the daily Wordle puzzle. The solution is deployed as a GCP function and serves results via a simple web interface.
+                    </p>
+                    <span class="inline-flex items-center bg-blue-200 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">
+                        <!-- Cloud Functions Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        GCP Cloud Functions
+                    </span>
+                    <span class="inline-flex items-center bg-green-200 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">
+                        <!-- Python Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        Python
+                    </span>
+                    <span class="inline-flex items-center bg-yellow-200 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                        <!-- Cloud Storage Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4c-3.72 0-6.73 2.76-7.35 6.35C2.65 10.77 1 12.39 1 14.5c0 2.48 2.02 4.5 4.5 4.5h14c2.48 0 4.5-2.02 4.5-4.5 0-2.07-1.42-3.84-3.65-4.46z"/></svg>
+                        Cloud Storage
+                    </span>
+                </a>
+
+                <!-- Project 3: (Template for future projects) -->
+                <a href="#" class="project-card block p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl hover:bg-slate-100 hover:-translate-y-4 hover:rotate-0.5">
+                    <div class="flex items-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        <h3 class="project-title text-xl font-bold ml-4 text-slate-800 transition-colors">Project Coming Soon!</h3>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Placeholder for my next data project.
+                    </p>
+                    <span class="inline-flex items-center bg-purple-200 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">
+                        <!-- GCP Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4c-3.72 0-6.73 2.76-7.35 6.35C2.65 10.77 1 12.39 1 14.5c0 2.48 2.02 4.5 4.5 4.5h14c2.48 0 4.5-2.02 4.5-4.5 0-2.07-1.42-3.84-3.65-4.46z"/></svg>
+                        GCP
+                    </span>
+                    <span class="inline-flex items-center bg-slate-200 text-slate-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                        <!-- Coming Soon Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M11 17h2v-2h-2v2zm0-4h2V7h-2v6z"/></svg>
+                        Coming Soon
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-slate-300 my-16">
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Let's Connect</h2>
+            <p class="text-lg text-slate-700 max-w-2xl mx-auto mb-8">
+                I'm always open to discussing new projects, sharing insights, or just networking with fellow builders and data enthusiasts. Feel free to reach out.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                <a href="mailto:olwtsnrj@google.com" class="inline-block px-6 py-3 rounded-lg bg-orange-500 text-white font-bold shadow-lg hover:bg-orange-600 transition-colors">
+                    Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/oluwatosin-raji92/" target="_blank" class="inline-block px-6 py-3 rounded-lg bg-white border border-gray-300 text-gray-700 font-bold shadow-sm hover:bg-slate-100 transition-colors">
+                    Connect on LinkedIn
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-200 text-slate-700 py-8 text-center mt-20">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Oluwatosin Raji. All Rights Reserved.</p>
+            <p>Built and hosted on Google Cloud Platform (GCP).</p>
+        </div>
+    </footer>
+</body>
+</html>
