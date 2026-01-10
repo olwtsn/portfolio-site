@@ -6,7 +6,6 @@
     <title>Oluwatosin Raji | Marketing Data Insights</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Nunito font for a rounded, friendly, and readable feel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -57,13 +56,15 @@
 
         <!-- About Me Section -->
         <section id="about" class="py-20 border-t border-slate-100">
-            <div class="container mx-auto px-6">
-                <!-- Changed to always be flex-col and items-center for centering -->
-                <div class="flex flex-col items-center text-center gap-12">
-                    <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0">
-                        <img src="/olwtsn_pic.png" alt="Oluwatosin Raji" class="w-full h-full object-cover rounded-2xl shadow-xl border-4 border-white">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <!-- Side-by-side layout for desktop, items-stretch ensures same height -->
+                <div class="flex flex-col md:flex-row items-stretch justify-center gap-8 md:gap-12">
+                    <!-- Image Box (Smaller width) -->
+                    <div class="w-full md:w-1/3 flex">
+                        <img src="/olwtsn_pic.png" alt="Oluwatosin Raji" class="w-full h-full object-cover rounded-2xl shadow-xl border-4 border-white min-h-[300px]">
                     </div>
-                    <div class="max-w-2xl">
+                    <!-- Text Box (Larger width) -->
+                    <div class="w-full md:w-2/3 flex flex-col justify-center text-center md:text-left bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                         <h2 class="text-3xl font-extrabold text-slate-900 mb-6">The person behind the data.</h2>
                         <p class="text-lg text-slate-600 leading-relaxed mb-4">
                             I’ve always been fascinated by how information can tell a story. My goal is to take that story and make it useful for everyone, not just the experts.
