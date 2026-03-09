@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Markets: Truth Machine or Social Casino? — Oluwatosin Raji</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ink: #1a1714;
+            --ink-light: #5c574f;
+            --ink-faint: #9c9690;
+            --paper: #f7f4ef;
+            --paper-dark: #ede9e2;
+            --rule: #d4cfc7;
+            --accent: #b8360a;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── MASTHEAD ── */
+        .masthead {
+            border-bottom: 3px double var(--rule);
+            padding: 28px 0 0;
+            background: var(--paper);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .masthead-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 14px;
+        }
+
+        .site-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .masthead-date {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            padding: 10px 0;
+            border-top: 1px solid var(--rule);
+        }
+
+        .nav-links a {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* ── ARTICLE HEADER ── */
+        .article-header {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 64px 40px 48px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .back-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .meta-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--rule);
+        }
+
+        .article-topic {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .article-date {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+
+        .article-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .article-standfirst {
+            font-size: 1.15rem;
+            color: var(--ink-light);
+            line-height: 1.7;
+            font-style: italic;
+            border-left: 3px solid var(--accent);
+            padding-left: 20px;
+            margin-bottom: 28px;
+        }
+
+        .article-byline {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .byline-photo {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--paper-dark);
+        }
+
+        .byline-name {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .byline-detail {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            margin-top: 3px;
+        }
+
+        /* ── ARTICLE BODY ── */
+        .article-layout {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .article-body {
+            padding: 52px 0 80px;
+        }
+
+        .article-body p {
+            margin-bottom: 1.6em;
+            font-size: 1.08rem;
+            color: var(--ink);
+            line-height: 1.85;
+        }
+
+        .article-body p:first-child::first-letter {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 4.2em;
+            font-weight: 900;
+            float: left;
+            line-height: 0.78;
+            margin: 0.08em 0.1em 0 0;
+            color: var(--accent);
+        }
+
+        .article-body h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 2.4em 0 0.8em;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+        }
+
+        .article-body h2::before {
+            content: '§';
+            color: var(--rule);
+            margin-right: 10px;
+            font-style: italic;
+        }
+
+        /* Math blocks */
+        .math-block {
+            background: var(--paper-dark);
+            border: 1px solid var(--rule);
+            border-left: 3px solid var(--ink-faint);
+            padding: 20px 24px;
+            margin: 2em 0;
+            overflow-x: auto;
+        }
+
+        .math-block .katex-display { margin: 0; }
+
+        /* Pullquote */
+        .pullquote {
+            border-top: 2px solid var(--ink);
+            border-bottom: 1px solid var(--rule);
+            padding: 28px 0;
+            margin: 2.4em 0;
+        }
+
+        .pullquote p {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.45rem !important;
+            font-style: italic;
+            color: var(--ink) !important;
+            line-height: 1.45 !important;
+            margin: 0 !important;
+        }
+
+        /* ── STICKY SIDEBAR ── */
+        .article-sidebar {
+            padding: 52px 0 80px;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-block {
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--rule);
+            margin-bottom: 28px;
+        }
+
+        .sidebar-block:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.63rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            margin-bottom: 14px;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toc-list a {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.67rem;
+            letter-spacing: 0.04em;
+            color: var(--ink-light);
+            text-decoration: none;
+            line-height: 1.4;
+            transition: color 0.15s;
+            display: block;
+        }
+
+        .toc-list a:hover { color: var(--accent); }
+
+        .share-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .share-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.15s;
+        }
+
+        .share-link:hover { color: var(--accent); }
+
+        .share-link::before {
+            content: '→';
+            color: var(--rule);
+        }
+
+        .sidebar-author-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-author-bio {
+            font-size: 0.82rem;
+            color: var(--ink-light);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-author-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.63rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .sidebar-author-link:hover { color: var(--accent); }
+
+        /* ── FOOTER ── */
+        .article-footer {
+            border-top: 3px double var(--rule);
+            padding: 48px 40px;
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-back {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-back:hover { color: var(--accent); }
+
+        .footer-copy {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.63rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .article-header > * { animation: fadeUp 0.5s ease both; }
+        .article-header > *:nth-child(1) { animation-delay: 0.05s; }
+        .article-header > *:nth-child(2) { animation-delay: 0.15s; }
+        .article-header > *:nth-child(3) { animation-delay: 0.25s; }
+        .article-header > *:nth-child(4) { animation-delay: 0.35s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .article-layout { grid-template-columns: 1fr; gap: 0; }
+            .article-sidebar { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .masthead-inner, .article-header, .article-layout, .article-footer { padding-left: 20px; padding-right: 20px; }
+            .masthead-top { flex-direction: column; align-items: flex-start; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MASTHEAD -->
+    <header class="masthead">
+        <div class="masthead-inner">
+            <div class="masthead-top">
+                <a href="/" class="site-name">Oluwatosin Raji</a>
+                <span class="masthead-date" id="today-date"></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Essays</a></li>
+                <li><a href="#">Economy</a></li>
+                <li><a href="#">Policy</a></li>
+                <li><a href="#">Governance</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ARTICLE HEADER -->
+        <header class="article-header">
+            <div class="article-meta">
+                <a href="/" class="back-link">← All Essays</a>
+                <span class="meta-dot"></span>
+                <span class="article-topic">Finance · Markets</span>
+                <span class="meta-dot"></span>
+                <span class="article-date">March 2025</span>
+            </div>
+
+            <h1 class="article-title">Prediction Markets: <em>Truth Machine</em> or Social Casino?</h1>
+
+            <p class="article-standfirst">
+                Platforms like Polymarket and Kalshi promise to be the most accurate truth machines ever built. But when the act of betting on reality can reshape it, the line between prediction and manipulation disappears.
+            </p>
+
+            <div class="article-byline">
+                <img src="/olwtsn_pic1.png" alt="Oluwatosin Raji" class="byline-photo">
+                <div>
+                    <p class="byline-name">Oluwatosin Raji</p>
+                    <p class="byline-detail">10 min read</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- ARTICLE LAYOUT -->
+        <div class="article-layout">
+
+            <!-- BODY -->
+            <article class="article-body">
+
+                <p>I will be upfront about my bias from the start. My instinct, when I hear prediction markets, is scepticism. Not the reflexive kind where I dismiss them immediately, but the nagging feeling that something is off. The more I looked into how they actually work, the more that feeling hardened into a considered view. These platforms, in their current form, likely cause more harm than good for our social fabric.</p>
+
+                <p>However, I have lived long enough to know that instincts can be wrong — sometimes. To write a fair assessment, we have to look at the parts I might be missing. If you disagree with my conclusion, I want you to understand exactly how I arrived there.</p>
+
+                <h2 id="what-is">What a Prediction Market Actually Is</h2>
+
+                <p>At its simplest, a prediction market is a place where people trade contracts tied to real-world outcomes. These aren't just sports bets; they cover everything from elections and interest rate hikes to scientific breakthroughs and global conflicts.</p>
+
+                <p>A contract pays out one dollar if an event happens and zero dollars if it does not. The price of that contract at any given moment represents the market's collective guess at the probability. If a "Yes" share for a candidate winning an election costs 65 cents, the market is telling you there is a 65% chance they win.</p>
+
+                <p>The two major players right now are Polymarket and Kalshi. These platforms argue they are the world's most accurate "truth machines." The theory is that when people put real money on their beliefs, they research harder, lie less, and provide a clearer signal than any pundit or pollster ever could.</p>
+
+                <h2 id="maths">The Maths of the "House"</h2>
+
+                <p>To understand why these markets can be a losing game for the average person, we have to look at the mechanics of how the money moves. Unlike a traditional bookmaker who sets the odds, these platforms often use an Automated Market Maker, or AMM.</p>
+
+                <p>The math behind many of these systems follows a constant product formula:</p>
+
+                <div class="math-block">
+                    $$x \times y = k$$
+                </div>
+
+                <p>In this equation, $x$ represents the number of "Yes" shares and $y$ represents the number of "No" shares. As more people buy "Yes," the supply of "Yes" shares in the pool decreases, which forces the price up to keep the value of $k$ constant.</p>
+
+                <p>While this seems fair, the "House" still exists. It hides in the overround and the spread. In a perfect world, the price of a "Yes" share and a "No" share would add up to exactly 100%. In reality, they often add up to 103% or 105%. That extra percentage is guaranteed profit for the liquidity providers and the platform.</p>
+
+                <p>Furthermore, there is the math of Expected Value. For a casual trader, the formula is:</p>
+
+                <div class="math-block">
+                    $$EV = (P_{win} \times Profit) - (P_{lose} \times Stake)$$
+                </div>
+
+                <p>Because of the fees and the "sharks" — professional traders using high-speed algorithms — the average person's expected value is almost always negative. Over time, the money flows from the many to the few. It is a casino dressed up as a laboratory.</p>
+
+                <h2 id="reflexivity">The Theory of Reflexivity: When Bets Change Reality</h2>
+
+                <div class="pullquote">
+                    <p>The market did not "predict" the future; it manufactured it.</p>
+                </div>
+
+                <p>The most significant danger of these markets is a concept called reflexivity. This is my main issue with the entire industry.</p>
+
+                <p>In a normal market, if I bet that the price of gold will go up, my bet does not actually create more gold in the ground. But in human affairs, the bet itself can change the outcome. This is similar to the observer effect in physics, where the act of watching a particle changes how it behaves.</p>
+
+                <p>Imagine a prediction market gives a CEO a 90% chance of being fired. The board of directors sees this "probability" on the news. Shareholders start calling for a change because they think the market knows something they don't. Employees start looking for new jobs. Eventually, the board fires the CEO simply because the market said it was inevitable. This creates a dangerous feedback loop where wealthy bettors can move the needle on reality by placing a large enough bet to shift public perception of what is "probable."</p>
+
+                <h2 id="counter">The Counter-Argument: Skin in the Game</h2>
+
+                <p>To be fair, there is a reason people defend these platforms. They solve the problem of "cheap talk." In our current media landscape, experts make bold claims every day with zero consequences for being wrong.</p>
+
+                <p>A useful example occurred during a New York City mayoral race. Billionaire Bill Ackman was vocal on social media, claiming that Andrew Cuomo still had a strong path to victory despite what the numbers were saying. In a world of just Twitter, that would just be another billionaire's opinion. However, the prediction market community pushed back — they challenged him to put his money where his mouth was. If he truly believed Cuomo had a high chance of winning, he could buy the "Yes" shares trading for pennies.</p>
+
+                <p>Ackman's refusal to engage provided a truth signal. It proved that even a billionaire couldn't move the consensus if the underlying facts didn't support him. In that case, the market was a filter for empty rhetoric.</p>
+
+                <h2 id="vulnerabilities">The Vulnerabilities: Manipulation and Oracles</h2>
+
+                <p>Even if we accept the "truth signal" argument, these platforms are easy to abuse. Three methods stand out.</p>
+
+                <p><strong>Wash Trading.</strong> A wealthy person can buy and sell shares to themselves to create the illusion of high activity and a high probability. This can trick news organisations into reporting a "shift in momentum" that doesn't exist.</p>
+
+                <p><strong>The Oracle Problem.</strong> These markets rely on an "Oracle" to decide who won the bet — usually a news feed or government website. If a hacker or corrupt official can manipulate that data source for even a few minutes, they can trigger a payout worth millions before anyone notices.</p>
+
+                <p><strong>The Whale Effect.</strong> In markets with low liquidity, a single person with enough capital can act as the "narrative driver." If a market only has $50,000 in it, someone with $100,000 can make the probability of an event look like 99% or 1% at will. They aren't predicting; they are painting a picture for the public to see.</p>
+
+                <h2 id="conclusion">Conclusion: A Net-Negative for the Social Fabric</h2>
+
+                <p>While prediction markets are mathematically elegant and can occasionally silence loud pundits, they are ultimately a net-negative for society. They encourage us to view our shared reality through the lens of a gambling app.</p>
+
+                <p>When we turn the most sensitive parts of our lives — our elections, our conflicts, our health — into a casino, we stop being active citizens and start being passive spectators. We stop asking <em>why</em> things are happening and start asking what the odds are.</p>
+
+                <p>By allowing reflexivity to distort our world and letting wealthy actors "buy" the probability of an event, we risk losing our grip on objective truth. A "truth machine" that can be manipulated by the highest bidder is not a machine worth building. When reality becomes a betting slip, we all lose.</p>
+
+            </article>
+
+            <!-- SIDEBAR -->
+            <aside class="article-sidebar">
+
+                <div class="sidebar-block">
+                    <p class="sidebar-label">In this essay</p>
+                    <ul class="toc-list">
+                        <li><a href="#what-is">What a prediction market is</a></li>
+                        <li><a href="#maths">The maths of the house</a></li>
+                        <li><a href="#reflexivity">The theory of reflexivity</a></li>
+                        <li><a href="#counter">The counter-argument</a></li>
+                        <li><a href="#vulnerabilities">Manipulation & oracles</a></li>
+                        <li><a href="#conclusion">Conclusion</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-block">
+                    <p class="sidebar-label">Share</p>
+                    <div class="share-links">
+                        <a href="https://twitter.com/intent/tweet?text=Prediction Markets: Truth Machine or Social Casino?&url=" class="share-link" target="_blank">Twitter / X</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="share-link" target="_blank">LinkedIn</a>
+                        <a href="mailto:?subject=Worth reading&body=Prediction Markets: Truth Machine or Social Casino?" class="share-link">Email a friend</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-block">
+                    <p class="sidebar-label">About the author</p>
+                    <p class="sidebar-author-name">Oluwatosin Raji</p>
+                    <p class="sidebar-author-bio">Data analyst and commentator writing about markets, money, and the policy choices that affect millions of people.</p>
+                    <a href="https://www.linkedin.com/in/oluwatosin-raji92/" target="_blank" class="sidebar-author-link">LinkedIn →</a>
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <footer style="border-top: 1px solid var(--rule); background: var(--paper);">
+        <div class="article-footer">
+            <a href="/" class="footer-back">← Back to all essays</a>
+            <p class="footer-copy">© 2025 Oluwatosin Raji</p>
+        </div>
+    </footer>
+
+    <script>
+        const d = new Date();
+        const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('today-date').textContent = d.toLocaleDateString('en-GB', opts);
+    </script>
+
+</body>
+</html>
