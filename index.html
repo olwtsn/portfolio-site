@@ -541,17 +541,52 @@
         }
 
         /* ── FOOTER ── */
-        <footer>
-            <div>
-                <p class="footer-name">Oluwatosin Raji</p>
-                <p class="footer-copy" style="margin-top:4px;">© 2025 · All opinions are my own</p>
-            </div>
-            <ul class="footer-links">
-                <li><a href="#essays">Essays</a></li>
-                <li><a href="/cdn-cgi/l/email-protection#036c6f7477706d716943646e626a6f2d606c6e">Email</a></li>
-                <li><a href="https://www.linkedin.com/in/oluwatosin-raji92/" target="_blank">LinkedIn</a></li>
-            </ul>
-        </footer>
+        footer {
+            background: var(--paper);
+            color: var(--ink);
+            padding: 64px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 24px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .footer-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-copy {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            margin-top: 4px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
@@ -766,7 +801,7 @@
         </div>
         <ul class="footer-links">
             <li><a href="#essays">Essays</a></li>
-            <li><a href="/cdn-cgi/l/email-protection#036c6f7477706d716943646e626a6f2d606c6e">Email</a></li>
+            <li><a href="mailto: olwtsnrj@gmail.com">Email</a></li>
             <li><a href="https://www.linkedin.com/in/oluwatosin-raji92/" target="_blank">LinkedIn</a></li>
         </ul>
     </footer>
