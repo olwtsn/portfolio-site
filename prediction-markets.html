@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Markets: Truth Machine or Social Casino? — Oluwatosin Raji</title>
     
-    <!-- Social Sharing Meta Tags -->
+
     <meta property="og:title" content="Prediction Markets: Truth Machine or Social Casino?">
     <meta property="og:description" content="Platforms like Polymarket and Kalshi promise to be the most accurate truth machines ever built. But when the act of betting on reality can reshape it, the line between prediction and manipulation disappears.">
-    <!-- Replace this with your full live URL once hosted: e.g., https://yourwebsite.com/prediction_markets_pic.png -->
-    <meta property="og:image" content="prediction_markets_pic.png">
+    <meta property="og:image" content="https://olwtsn.cloud/prediction_markets_pic.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:type" content="article">
+    <meta property="og:url" content="https://olwtsn.cloud/prediction-markets">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Prediction Markets: Truth Machine or Social Casino?">
     <meta name="twitter:description" content="Platforms like Polymarket and Kalshi promise to be the most accurate truth machines ever built.">
-    <!-- Replace this with your full live URL once hosted -->
-    <meta name="twitter:image" content="prediction_markets_pic.png">
+    <meta name="twitter:image" content="https://olwtsn.cloud/prediction_markets_pic.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- KaTeX for math rendering -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
@@ -239,6 +239,7 @@
             border: 1px solid var(--rule);
             background: var(--paper-dark);
             margin-bottom: 40px;
+            display: block;
         }
 
         .article-body p {
@@ -302,6 +303,48 @@
             color: var(--ink) !important;
             line-height: 1.45 !important;
             margin: 0 !important;
+        }
+
+        /* ── MOBILE SHARE BAR (shown only on mobile, sits below byline) ── */
+        .mobile-share {
+            display: none;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .mobile-share-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.63rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            margin-bottom: 12px;
+        }
+
+        .mobile-share-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .mobile-share-btn {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-light);
+            text-decoration: none;
+            border: 1px solid var(--rule);
+            padding: 8px 14px;
+            border-radius: 2px;
+            transition: color 0.15s, border-color 0.15s;
+            display: inline-block;
+        }
+
+        .mobile-share-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
         /* ── STICKY SIDEBAR ── */
@@ -451,8 +494,12 @@
             .article-sidebar { 
                 position: static; 
                 padding: 40px 0; 
-                border-top: 2px solid var(--ink); 
+                border-top: 2px solid var(--ink);
             }
+            /* Hide sidebar share block on mobile — we use the inline one instead */
+            .sidebar-share-block { display: none; }
+            /* Show the inline mobile share bar */
+            .mobile-share { display: block; }
         }
 
         @media (max-width: 600px) {
@@ -503,6 +550,19 @@
                     <p class="byline-detail">10 min read</p>
                 </div>
             </div>
+
+            <!-- MOBILE SHARE BAR — visible only below 900px -->
+            <div class="mobile-share">
+                <p class="mobile-share-label">Share this essay</p>
+                <div class="mobile-share-links">
+                    <a href="https://twitter.com/intent/tweet?text=Prediction%20Markets%3A%20Truth%20Machine%20or%20Social%20Casino%3F&url=https%3A%2F%2Folwtsn.cloud%2Fprediction-markets"
+                       class="mobile-share-btn" target="_blank" rel="noopener">Twitter / X</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Folwtsn.cloud%2Fprediction-markets"
+                       class="mobile-share-btn" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:?subject=Worth%20reading&body=Prediction%20Markets%3A%20Truth%20Machine%20or%20Social%20Casino%3F%20%E2%80%94%20https%3A%2F%2Folwtsn.cloud%2Fprediction-markets"
+                       class="mobile-share-btn">Email</a>
+                </div>
+            </div>
         </header>
 
         <!-- ARTICLE LAYOUT -->
@@ -511,7 +571,6 @@
             <!-- BODY -->
             <article class="article-body">
 
-                <!-- Featured Image placed inside the article body -->
                 <img src="prediction_markets_pic.png" alt="Editorial cartoon of a roulette wheel with miniature real-world items" class="article-main-image">
 
                 <p>I will be upfront about my bias from the start. My instinct, when I hear prediction markets, is skepticism. Not the reflexive kind where I dismiss them immediately, but the nagging feeling that something is off. The more I looked into how they actually work, the more that feeling hardened into a considered view. These platforms, in their current form, likely cause more harm than good for our social fabric.</p>
@@ -603,12 +662,16 @@
                     </ul>
                 </div>
 
-                <div class="sidebar-block">
+                <!-- Hidden on mobile via .sidebar-share-block -->
+                <div class="sidebar-block sidebar-share-block">
                     <p class="sidebar-label">Share</p>
                     <div class="share-links">
-                        <a href="https://twitter.com/intent/tweet?text=Prediction Markets: Truth Machine or Social Casino?&url=" class="share-link" target="_blank">Twitter / X</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="share-link" target="_blank">LinkedIn</a>
-                        <a href="mailto:?subject=Worth reading&body=Prediction Markets: Truth Machine or Social Casino?" class="share-link">Email a friend</a>
+                        <a href="https://twitter.com/intent/tweet?text=Prediction%20Markets%3A%20Truth%20Machine%20or%20Social%20Casino%3F&url=https%3A%2F%2Folwtsn.cloud%2Fprediction-markets"
+                           class="share-link" target="_blank" rel="noopener">Twitter / X</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Folwtsn.cloud%2Fprediction-markets"
+                           class="share-link" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="mailto:?subject=Worth%20reading&body=Prediction%20Markets%3A%20Truth%20Machine%20or%20Social%20Casino%3F%20%E2%80%94%20https%3A%2F%2Folwtsn.cloud%2Fprediction-markets"
+                           class="share-link">Email a friend</a>
                     </div>
                 </div>
 
@@ -628,7 +691,7 @@
     <footer style="border-top: 1px solid var(--rule); background: var(--paper);">
         <div class="article-footer">
             <a href="/" class="footer-back">← Back to all essays</a>
-            <p class="footer-copy">© 2025 Oluwatosin Raji</p>
+            <p class="footer-copy">© 2026 Oluwatosin Raji</p>
         </div>
     </footer>
 
@@ -638,7 +701,6 @@
         document.getElementById('today-date').textContent = d.toLocaleDateString('en-GB', opts);
     </script>
 
-    <!-- Init KaTeX to render Math -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             renderMathInElement(document.body, {
