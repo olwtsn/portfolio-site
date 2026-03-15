@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Business of Formula 1 — Oluwatosin Raji</title>
+
+    <meta property="og:title" content="The Business of Formula 1">
+    <meta property="og:description" content="Fast cars are the show. But the real race — the one worth billions — happens off the track. A deep look at one of the most unusual commercial enterprises on earth.">
+    <meta property="og:image" content="https://olwtsn.cloud/f1_business_pic.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://olwtsn.cloud/f1-business.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Business of Formula 1">
+    <meta name="twitter:description" content="Fast cars are the show. But the real race happens off the track.">
+    <meta name="twitter:image" content="https://olwtsn.cloud/f1_business_pic.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ink: #1a1714;
+            --ink-light: #5c574f;
+            --ink-faint: #9c9690;
+            --paper: #f7f4ef;
+            --paper-dark: #ede9e2;
+            --rule: #d4cfc7;
+            --accent: #b8360a;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── MASTHEAD ── */
+        .masthead {
+            border-bottom: 3px double var(--rule);
+            padding: 28px 0 0;
+            background: var(--paper);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .masthead-inner { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+        .masthead-top { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 14px; }
+        .site-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: var(--ink);
+            text-decoration: none;
+        }
+        .masthead-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+        .nav-links { display: flex; gap: 24px; list-style: none; padding: 10px 0; border-top: 1px solid var(--rule); }
+        .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.15s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* ── ARTICLE HEADER ── */
+        .article-header { max-width: 780px; margin: 0 auto; padding: 64px 40px 48px; border-bottom: 1px solid var(--rule); }
+        .article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .back-link { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; transition: color 0.15s; }
+        .back-link:hover { color: var(--accent); }
+        .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--rule); }
+        .article-topic { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+        .article-date { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+        .article-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 24px; }
+        .article-title em { font-style: italic; color: var(--accent); }
+        .article-standfirst { font-size: 1.15rem; color: var(--ink-light); line-height: 1.7; font-style: italic; border-left: 3px solid var(--accent); padding-left: 20px; margin-bottom: 28px; }
+        .article-byline { display: flex; align-items: center; gap: 14px; }
+        .byline-photo { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--paper-dark); }
+        .byline-name { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); font-weight: 500; }
+        .byline-detail { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-top: 3px; }
+
+        .mobile-share { display: none; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule); }
+        .mobile-share-label { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px; }
+        .mobile-share-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .mobile-share-btn { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; border: 1px solid var(--rule); padding: 8px 14px; border-radius: 2px; transition: color 0.15s, border-color 0.15s; display: inline-block; }
+        .mobile-share-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* ── ARTICLE LAYOUT ── */
+        .article-layout { max-width: 1120px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 1fr 260px; gap: 80px; align-items: start; }
+        .article-body { padding: 52px 0 80px; }
+        .article-main-image { width: 100%; height: auto; border: 1px solid var(--rule); background: var(--paper-dark); margin-bottom: 40px; display: block; }
+
+        .article-body p { margin-bottom: 1.6em; font-size: 1.08rem; color: var(--ink); line-height: 1.85; }
+        .article-body p:first-of-type::first-letter {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 4.2em; font-weight: 900; float: left;
+            line-height: 0.87;
+            margin: 0 0.1em -0.1em 0;
+            padding-top: 0.06em;
+            color: var(--accent);
+        }
+        .article-body h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.65rem; font-weight: 700; color: var(--ink);
+            margin: 2.4em 0 0.8em; line-height: 1.25; letter-spacing: -0.01em;
+        }
+        .article-body h2::before { content: '§'; color: var(--rule); margin-right: 10px; font-style: italic; }
+        .article-body h3 {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--accent); margin: 2em 0 0.5em;
+        }
+
+        /* Pullquote */
+        .pullquote { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); padding: 28px 0; margin: 2.4em 0; }
+        .pullquote p { font-family: 'Playfair Display', Georgia, serif; font-size: 1.45rem !important; font-style: italic; color: var(--ink) !important; line-height: 1.45 !important; margin: 0 !important; }
+
+        /* Chart container — styled like math-block */
+        .chart-container {
+            background: var(--paper-dark);
+            border: 1px solid var(--rule);
+            border-left: 3px solid var(--ink-faint);
+            padding: 24px;
+            margin: 2em 0;
+        }
+        .chart-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 4px; }
+        .chart-sub { font-family: 'Source Serif 4', Georgia, serif; font-size: 0.82rem; color: var(--ink-faint); font-style: italic; margin-bottom: 20px; line-height: 1.5; }
+        .chart-note { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.04em; color: var(--ink-faint); margin-top: 12px; line-height: 1.6; }
+
+        /* Stat grid */
+        .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 2em 0; }
+        .stat-cell { background: var(--paper); padding: 18px 20px; }
+        .stat-cell-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+        .stat-cell-value { font-family: 'Playfair Display', Georgia, serif; font-size: 1.9rem; font-weight: 700; color: var(--ink); line-height: 1.15; display: block; }
+        .stat-cell-note { font-family: 'DM Mono', monospace; font-size: 0.57rem; color: var(--ink-faint); margin-top: 5px; letter-spacing: 0.04em; }
+
+        /* Callout */
+        .callout {
+            background: var(--paper-dark);
+            border: 1px solid var(--rule);
+            border-left: 3px solid var(--accent);
+            padding: 22px 26px;
+            margin: 2em 0;
+        }
+        .callout-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+        .callout p { font-size: 0.9rem !important; color: var(--ink-light) !important; line-height: 1.7 !important; margin-bottom: 0.7em !important; }
+        .callout p:last-child { margin-bottom: 0 !important; }
+        .callout strong { color: var(--ink) !important; }
+        .callout p::first-letter { all: unset; }
+
+        /* ── SIDEBAR ── */
+        .article-sidebar { padding: 52px 0 80px; position: sticky; top: 120px; }
+        .sidebar-block { padding-bottom: 28px; border-bottom: 1px solid var(--rule); margin-bottom: 28px; }
+        .sidebar-block:last-child { border-bottom: none; }
+        .sidebar-label { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .toc-list a { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.04em; color: var(--ink-light); text-decoration: none; line-height: 1.4; transition: color 0.15s; display: block; }
+        .toc-list a:hover { color: var(--accent); }
+        .share-links { display: flex; flex-direction: column; gap: 10px; }
+        .share-link { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.15s; }
+        .share-link:hover { color: var(--accent); }
+        .share-link::before { content: '→'; color: var(--rule); }
+        .sidebar-author-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .sidebar-author-bio { font-size: 0.82rem; color: var(--ink-light); line-height: 1.6; margin-bottom: 12px; }
+        .sidebar-author-link { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; transition: color 0.15s; }
+        .sidebar-author-link:hover { color: var(--accent); }
+
+        /* ── FOOTER ── */
+        .article-footer { border-top: 3px double var(--rule); padding: 48px 40px; max-width: 1120px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-back { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); text-decoration: none; transition: color 0.15s; }
+        .footer-back:hover { color: var(--accent); }
+        .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.63rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .article-header > * { animation: fadeUp 0.5s ease both; }
+        .article-header > *:nth-child(1) { animation-delay: 0.05s; }
+        .article-header > *:nth-child(2) { animation-delay: 0.15s; }
+        .article-header > *:nth-child(3) { animation-delay: 0.25s; }
+        .article-header > *:nth-child(4) { animation-delay: 0.35s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .article-layout { grid-template-columns: 1fr; gap: 0; }
+            .article-sidebar { position: static; padding: 40px 0; border-top: 2px solid var(--ink); }
+            .sidebar-share-block { display: none; }
+            .mobile-share { display: block; }
+        }
+        @media (max-width: 600px) {
+            .masthead-inner, .article-header, .article-layout, .article-footer { padding-left: 20px; padding-right: 20px; }
+            .masthead-top { flex-direction: column; align-items: flex-start; gap: 6px; }
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+    <div class="masthead-inner">
+        <div class="masthead-top">
+            <a href="/" class="site-name">Oluwatosin Raji</a>
+            <span class="masthead-date" id="today-date"></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Essays</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+        <div class="article-meta">
+            <a href="/" class="back-link">← All Essays</a>
+            <span class="meta-dot"></span>
+            <span class="article-topic">Sport · Business · Finance</span>
+            <span class="meta-dot"></span>
+            <span class="article-date">March 2026</span>
+        </div>
+
+        <h1 class="article-title">The Business of <em>Formula 1</em></h1>
+
+        <p class="article-standfirst">
+            Fast cars are the show. But the real race, the one worth billions, happens off the track. Here is what I learnt about one of the most unusual commercial enterprises on earth.
+        </p>
+
+        <div class="article-byline">
+            <img src="/olwtsn_pic1.png" alt="Oluwatosin Raji" class="byline-photo">
+            <div>
+                <p class="byline-name">Oluwatosin Raji</p>
+                <p class="byline-detail">18 min read</p>
+            </div>
+        </div>
+
+        <div class="mobile-share">
+            <p class="mobile-share-label">Share this essay</p>
+            <div class="mobile-share-links">
+                <a href="https://twitter.com/intent/tweet?text=The%20Business%20of%20Formula%201&url=https%3A%2F%2Folwtsn.cloud%2Ff1-business.html" class="mobile-share-btn" target="_blank" rel="noopener">Twitter / X</a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Folwtsn.cloud%2Ff1-business.html" class="mobile-share-btn" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="/cdn-cgi/l/email-protection#87b8f4f2e5ede2e4f3bad0e8f5f3efa2b5b7f5e2e6e3eee9e0a1e5e8e3febad3efe2a2b5b7c5f2f4eee9e2f4f4a2b5b7e8e1a2b5b7c1e8f5eaf2ebe6a2b5b7b6a2b5b7a2c2b5a2bfb7a2beb3a2b5b7eff3f3f7f4a2b4c6a2b5c1a2b5c1e8ebf0f3f4e9a9e4ebe8f2e3a2b5c1e1b6aae5f2f4eee9e2f4f4a9eff3eaeb" class="mobile-share-btn">Email</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ARTICLE LAYOUT -->
+    <div class="article-layout">
+
+        <!-- BODY -->
+        <article class="article-body">
+
+            <!-- EDITORIAL SVG IMAGE -->
+            <svg class="article-main-image" viewBox="0 0 780 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Editorial illustration: Formula 1 car with rising stock chart">
+                <!-- Background -->
+                <rect width="780" height="390" fill="#ede9e2"/>
+
+                <!-- Faint ruled lines -->
+                <line x1="0" y1="80"  x2="780" y2="80"  stroke="#d4cfc7" stroke-width="0.5"/>
+                <line x1="0" y1="160" x2="780" y2="160" stroke="#d4cfc7" stroke-width="0.5"/>
+                <line x1="0" y1="240" x2="780" y2="240" stroke="#d4cfc7" stroke-width="0.5"/>
+                <line x1="0" y1="320" x2="780" y2="320" stroke="#d4cfc7" stroke-width="0.5"/>
+
+                <!-- Faint vertical grid lines -->
+                <line x1="130" y1="0" x2="130" y2="390" stroke="#d4cfc7" stroke-width="0.5"/>
+                <line x1="260" y1="0" x2="260" y2="390" stroke="#d4cfc7" stroke-width="0.5"/>
+                <line x1="390" y1="0" x2="390" y2="390" stroke="#d4cfc7" stroke-width="0.5"/>
+                <line x1="520" y1="0" x2="520" y2="390" stroke="#d4cfc7" stroke-width="0.5"/>
+                <line x1="650" y1="0" x2="650" y2="390" stroke="#d4cfc7" stroke-width="0.5"/>
+
+                <!-- Sponsor badge outlines (floating, abstract) -->
+                <rect x="52"  y="68"  width="100" height="26" rx="2" fill="none" stroke="#b8360a" stroke-width="1.2"/>
+                <rect x="172" y="52"  width="88"  height="22" rx="2" fill="none" stroke="#b8360a" stroke-width="1"/>
+                <rect x="288" y="60"  width="110" height="26" rx="2" fill="none" stroke="#b8360a" stroke-width="1.2"/>
+                <rect x="416" y="50"  width="80"  height="20" rx="2" fill="none" stroke="#b8360a" stroke-width="0.8"/>
+
+                <!-- Badge label lines (to suggest logo text) -->
+                <line x1="68"  y1="81" x2="136" y2="81" stroke="#b8360a" stroke-width="0.7" opacity="0.5"/>
+                <line x1="188" y1="63" x2="244" y2="63" stroke="#b8360a" stroke-width="0.7" opacity="0.5"/>
+                <line x1="303" y1="73" x2="382" y2="73" stroke="#b8360a" stroke-width="0.7" opacity="0.5"/>
+                <line x1="428" y1="60" x2="484" y2="60" stroke="#b8360a" stroke-width="0.6" opacity="0.5"/>
+
+                <!-- F1 CAR SILHOUETTE (side view, dark ink) -->
+                <!-- Rear wheel -->
+                <circle cx="390" cy="298" r="30" fill="#1a1714"/>
+                <circle cx="390" cy="298" r="15" fill="#ede9e2"/>
+                <circle cx="390" cy="298" r="6"  fill="#1a1714"/>
+
+                <!-- Front wheel -->
+                <circle cx="155" cy="298" r="25" fill="#1a1714"/>
+                <circle cx="155" cy="298" r="12" fill="#ede9e2"/>
+                <circle cx="155" cy="298" r="5"  fill="#1a1714"/>
+
+                <!-- Rear wing vertical post -->
+                <rect x="436" y="228" width="12" height="44" rx="1" fill="#1a1714"/>
+                <!-- Rear wing horizontal blade -->
+                <rect x="420" y="225" width="52" height="10" rx="1" fill="#1a1714"/>
+
+                <!-- Main body -->
+                <path d="
+                    M 62,275
+                    C 80,265 115,256 165,252
+                    L 240,248
+                    C 258,244 272,240 290,236
+                    C 262,228 268,214 296,210
+                    C 324,206 352,210 368,220
+                    C 380,228 384,238 378,248
+                    L 432,255
+                    C 446,260 454,268 458,276
+                    L 458,282
+                    C 440,288 410,292 370,293
+                    C 330,294 270,294 230,292
+                    C 185,290 140,284 100,278
+                    C 78,274 65,273 62,275 Z
+                " fill="#1a1714"/>
+
+                <!-- Cockpit opening (cut-out to suggest driver) -->
+                <ellipse cx="330" cy="230" rx="28" ry="14" fill="#5c574f"/>
+
+                <!-- Front wing -->
+                <rect x="28" y="270" width="90" height="8" rx="1" fill="#1a1714"/>
+                <!-- Front wing end plate -->
+                <rect x="28" y="264" width="7" height="18" rx="1" fill="#1a1714"/>
+
+                <!-- Nose cone highlight (thin line) -->
+                <line x1="62" y1="274" x2="95" y2="260" stroke="#f7f4ef" stroke-width="0.8" opacity="0.4"/>
+
+                <!-- STOCK CHART LINE (rising from car exhaust area) -->
+                <!-- Chart area background (subtle) -->
+                <rect x="470" y="80" width="290" height="230" fill="#f7f4ef" opacity="0.4"/>
+
+                <!-- Chart fill area -->
+                <path d="
+                    M 475,278
+                    L 500,262 L 525,268 L 548,252 L 572,258
+                    L 592,240 L 610,248 L 628,225 L 650,215
+                    L 672,195 L 695,178 L 718,148 L 738,160 L 755,138
+                    L 755,310 Z
+                " fill="#b8360a" opacity="0.07"/>
+
+                <!-- Chart line -->
+                <polyline
+                    points="475,278 500,262 525,268 548,252 572,258 592,240 610,248 628,225 650,215 672,195 695,178 718,148 738,160 755,138"
+                    fill="none" stroke="#b8360a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+
+                <!-- Data points on chart -->
+                <circle cx="475" cy="278" r="3" fill="#b8360a"/>
+                <circle cx="525" cy="268" r="3" fill="#b8360a"/>
+                <circle cx="572" cy="258" r="3" fill="#b8360a"/>
+                <circle cx="610" cy="248" r="3" fill="#b8360a"/>
+                <circle cx="650" cy="215" r="3" fill="#b8360a"/>
+                <circle cx="695" cy="178" r="3" fill="#b8360a"/>
+                <circle cx="718" cy="148" r="4" fill="#b8360a"/>
+                <circle cx="755" cy="138" r="3" fill="#b8360a"/>
+
+                <!-- Chart labels -->
+                <text x="472" y="295" font-family="'DM Mono', monospace" font-size="9" fill="#9c9690" letter-spacing="0.05em">2017</text>
+                <text x="718" y="295" font-family="'DM Mono', monospace" font-size="9" fill="#9c9690" letter-spacing="0.05em">2025</text>
+
+                <!-- Y-axis labels -->
+                <text x="760" y="142" font-family="'DM Mono', monospace" font-size="9" fill="#b8360a" letter-spacing="0.05em">$99</text>
+                <text x="760" y="282" font-family="'DM Mono', monospace" font-size="9" fill="#9c9690" letter-spacing="0.05em">$25</text>
+
+                <!-- Connecting dashed line from car to chart -->
+                <line x1="458" y1="268" x2="475" y2="278" stroke="#b8360a" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+
+                <!-- Bottom rule and text -->
+                <line x1="0" y1="360" x2="780" y2="360" stroke="#b8360a" stroke-width="1.5"/>
+                <text x="40"  y="378" font-family="'DM Mono', monospace" font-size="9.5" fill="#9c9690" letter-spacing="0.2em" text-anchor="start">FORMULA 1</text>
+                <text x="390" y="378" font-family="'DM Mono', monospace" font-size="9.5" fill="#9c9690" letter-spacing="0.2em" text-anchor="middle">SPEED · MONEY · POWER</text>
+                <text x="740" y="378" font-family="'DM Mono', monospace" font-size="9.5" fill="#9c9690" letter-spacing="0.15em" text-anchor="end">MARCH 2026</text>
+            </svg>
+
+            <!-- ── ARTICLE CONTENT ── -->
+
+            <p>I did not grow up watching Formula 1. I grew up in Lagos, where a sport that charges the equivalent of two million naira for a grandstand seat, if it even visited your continent, was easy to ignore. F1 felt like a European hobby for people with too much money. Loud, expensive, and very far away.</p>
+
+            <p>Then I started paying attention to the business. And everything changed.</p>
+
+            <p>F1 is not a sport that happens to make money. It is a commercial product that happens to involve racing. Once you understand the difference, you cannot unsee it. Every race is a 24-event global media property. Every team is a franchise. Every sponsor gets a return-on-investment report. Every city that hosts a Grand Prix has written a cheque, sometimes a very large one. This is what I have learnt about how it all works.</p>
+
+            <!-- SECTION 1 -->
+            <h2 id="who-owns">Who actually owns Formula 1?</h2>
+
+            <p>The FIA, the Fédération Internationale de l'Automobile, sets the rules. But the FIA does not own the business. The commercial rights to Formula 1 belong to a company called the Formula One Group, a subsidiary of Liberty Media Corporation: an American entertainment company listed on NASDAQ under the tickers FWONK and FWONA.</p>
+
+            <p>In January 2017, Liberty bought those commercial rights for $4.4 billion. At the time, many people thought they had overpaid. Those people have since gone quiet.</p>
+
+            <p>What does owning the "commercial rights" mean in practice? It means Liberty controls every deal that makes F1 money: the television rights that broadcasters pay for, the fees that cities pay to host races, and the global sponsorships from brands like Rolex, Aramco, and LVMH. The FIA sets the rules. Liberty sells the show. They are partners, and occasionally adversaries, but the commercial power sits firmly with Liberty.</p>
+
+            <div class="chart-container">
+                <p class="chart-label">FWONA Share Price (USD) &mdash; 2017 to 2026</p>
+                <p class="chart-sub">Liberty Media's Formula One tracking stock from the month of acquisition through to March 2026. The all-time high of $99.52 was reached in October 2025.</p>
+                <div style="position:relative;width:100%;height:260px;">
+                    <canvas id="stockChart"></canvas>
+                </div>
+                <p class="chart-note">Source: NASDAQ / Macrotrends. Approximate quarterly data points. FWONA = Series A tracking shares in the Formula One Group. The March 2020 trough of ~$17 reflects the complete suspension of the race calendar during COVID-19.</p>
+            </div>
+
+            <p>The chart earns its place here. From a starting price implying roughly $25 per share, the stock touched $99.52 in October 2025: a near four-fold return in eight years, on an asset many thought was overpriced at purchase. Three forces drove that rise. The <em>Netflix effect</em>, which brought millions of new fans to the sport through the Drive to Survive documentary series. The United States waking up to F1, with American viewership per race roughly doubling between 2017 and 2024. And Liberty's systematic expansion of hosting fees, media deals, and the global calendar itself.</p>
+
+            <p>The COVID crash in early 2020 brought the stock close to its lowest point since Liberty's acquisition. No races meant no income. It also turned out to be the buying opportunity of the decade. By 2025, the Formula One Group generated $3.9 billion in total revenue and had $14.2 billion in future revenue already under signed contracts.</p>
+
+            <div class="stat-grid">
+                <div class="stat-cell">
+                    <p class="stat-cell-label">2025 Total Revenue</p>
+                    <p class="stat-cell-value">$3.9B</p>
+                    <p class="stat-cell-note">+14% year on year</p>
+                </div>
+                <div class="stat-cell">
+                    <p class="stat-cell-label">Race Attendance</p>
+                    <p class="stat-cell-value">6.75M</p>
+                    <p class="stat-cell-note">+4% vs 2024 season</p>
+                </div>
+                <div class="stat-cell">
+                    <p class="stat-cell-label">Live Viewership Growth</p>
+                    <p class="stat-cell-value">+21%</p>
+                    <p class="stat-cell-note">vs prior season</p>
+                </div>
+                <div class="stat-cell">
+                    <p class="stat-cell-label">Contracted Future Revenue</p>
+                    <p class="stat-cell-value">$14.2B</p>
+                    <p class="stat-cell-note">Already signed</p>
+                </div>
+            </div>
+
+            <!-- SECTION 2 -->
+            <h2 id="four-streams">Four ways Formula 1 makes money</h2>
+
+            <p>The Formula One Group earns through four main channels, each growing at a different rate and telling a different part of the commercial story.</p>
+
+            <h3>Race Promotion Fees &mdash; 27% of revenue</h3>
+
+            <p>Every country hosting a Grand Prix pays F1 a hosting fee. The contracts run three to seven years, with annual escalation clauses tied to inflation or fixed at up to 5% a year. Singapore pays around $35 million annually. Las Vegas, one of the newest venues, pays considerably more. Abu Dhabi, which hosts the season finale, commands a premium for the prestige slot.</p>
+
+            <p>The striking part is that host cities pay F1, not the other way around. The race is a privilege. Cities and governments compete for a calendar slot because of what an F1 race delivers in tourism, infrastructure investment, and global visibility. More on what that could mean for an African city later.</p>
+
+            <h3>Media Rights &mdash; 31% of revenue</h3>
+
+            <p>Television and streaming deals with broadcasters around the world generated $1.18 billion in 2024, up from $607 million when Liberty bought the sport in 2017. That is almost double in seven years, without a single additional race. The US market drove much of the growth: American viewership per race grew by roughly 120% across that period.</p>
+
+            <p>Liberty's long-running ESPN deal was widely considered underpriced and expired in 2025. The replacement deal's terms have not been disclosed, but streaming platforms including Amazon and Apple were reportedly competing for the rights. The next media rights cycle will be the clearest sign yet of how much the sport's commercial value has grown.</p>
+
+            <h3>Sponsorship &mdash; 22% of revenue</h3>
+
+            <p>Global brands pay F1 directly, not a specific team, for championship-wide association. The current roster includes Rolex, Aramco, Heineken, DHL, and Crypto.com. LVMH, the luxury conglomerate behind Louis Vuitton and Moët Hennessy, signed a ten-year global partnership worth $150 million per season. Standard Chartered joined in 2025. Sponsorship revenue grew 10% in 2024 and again in 2025, driven by new partners and the sport's expanding digital footprint.</p>
+
+            <h3>Everything Else &mdash; 20% and growing</h3>
+
+            <p>The Paddock Club, F1's exclusive hospitality product at each race, is one of the most coveted corporate entertainment offerings in world sport. A weekend pass can cost upwards of $10,000. F1 TV, the sport's direct-to-consumer streaming platform, is growing steadily. Then there are licensing deals covering the F1 video game series (one of the best-selling sports games on earth), Lego sets, apparel, and freight revenue. There is also F1 Arcade, a chain of F1-themed entertainment venues expanding across the United States, with 30 locations planned by 2027. Liberty is methodically converting the F1 brand into a consumer product line, not just a broadcast rights package.</p>
+
+            <!-- SECTION 3 -->
+            <h2 id="the-teams">The ten teams and how they survive</h2>
+
+            <p>The Formula One Group handles the championship business. The ten teams are separate enterprises, and they earn money in a fundamentally different way. Their economics are also more fragile, and more interesting, than you might expect.</p>
+
+            <h3>Prize Money</h3>
+
+            <p>Each year, Liberty distributes roughly 45 to 50% of F1's primary revenue back to the ten teams. In 2025, that was approximately $1.4 billion across the grid. The split is not equal. About half the prize pot is allocated based on the prior year's Constructors' Championship result, so winning is worth something real. McLaren, as 2024 Constructors' Champions, received around $147 million from that performance slice alone.</p>
+
+            <p>Ferrari receives something no other team does: a permanent historical bonus, estimated at around 5% of the total prize fund, simply for being the only team to have competed in every season since 1950. That is between $70 and $80 million per year just for existing. History, it turns out, pays well.</p>
+
+            <div class="callout">
+                <p class="callout-label">Interesting facts about the teams</p>
+                <p><strong>Red Bull</strong> was a drinks company before it was a racing team. They bought Jaguar Racing from Ford in 2005 for $1. Ford had spent over $600 million on it.</p>
+                <p><strong>McLaren's</strong> partial stake sale in late 2025 valued the team at $4.1 billion. In 2010, it was worth closer to $400 million. Average results, well managed, compound significantly over time.</p>
+                <p><strong>Aston Martin</strong> was acquired by Lawrence Stroll in 2018, when it was known as Racing Point, for under $100 million. By 2023, independent valuations placed it above $1.3 billion: a 13x return without a single race win during that period.</p>
+                <p><strong>Williams</strong>, one of F1's most storied names with seven Constructors' Championships, was bought by Dorilton Capital in 2020 for $200 million. Estimated 2025 valuation: over $1 billion.</p>
+                <p><strong>Cadillac</strong>, backed by General Motors, paid a $450 million anti-dilution fee just to join the grid as the 11th team in 2026. The price of entry tells you everything about how the franchise model has evolved.</p>
+            </div>
+
+            <h3>Team Sponsorship</h3>
+
+            <p>Prize money alone does not run an F1 team. Sponsorship is the engine. In 2024, the ten teams combined generated $2.05 billion in sponsorship revenue, trailing only the NFL among major sports leagues globally. The average F1 team now secures approximately $250 million in annual sponsorship, a 20% increase from 2023.</p>
+
+            <p>The detail is what makes these numbers credible. An airbox logo, the branding on top of the car and highly visible on every television shot, costs between $5.7 and $7.5 million per season. A patch on a driver's race suit chest costs between $1.4 and $1.6 million. The average F1 sponsorship deal is worth $6.22 million, more than eight times the average NFL deal at $745,000. The F1 audience is smaller than the NFL's, but it is wealthier, more global, and more engaged by almost every metric that sponsors use.</p>
+
+            <!-- SECTION 4 -->
+            <h2 id="cost-cap">The rule that changed everything</h2>
+
+            <p>Before 2021, Formula 1 had a serious structural problem. The top teams, Mercedes, Ferrari, and Red Bull, were spending over $400 million per season on car development. Mid-field teams like Force India or Williams had to operate on under $150 million. On track, the result was predictable: whoever spent the most usually won. Mercedes won seven consecutive Constructors' Championships from 2014 to 2020. Not because they were cleverer, necessarily, but because they could throw more engineers, more wind tunnel hours, and more computing power at every problem than any rival could afford.</p>
+
+            <p>Smaller teams were not just losing races. Some were close to bankruptcy. Force India went into administration in 2018. Only Lawrence Stroll's emergency acquisition saved those jobs. The sport was consuming itself from within, and the franchise model that now makes team ownership so attractive simply did not exist in credible form.</p>
+
+            <p>Then came the budget cap.</p>
+
+            <p>From 2021 onwards, teams could spend no more than $145 million per season on car development and operations. Driver salaries, the three highest-paid executives, and marketing costs were excluded from the calculation. The cap has since settled at around $140 million as a baseline, adjusted annually for inflation, with each race beyond 21 on the calendar adding $1.8 million to the permitted allowance.</p>
+
+            <div class="pullquote">
+                <p>The most important effect of the cap was not competitive. It was financial. Teams that used to lose money every year now have a predictable cost structure. You cannot go bankrupt spending twice what the rules allow.</p>
+            </div>
+
+            <p>The contrast with the pre-cap era is sharp. When Red Bull breached the 2021 cap by $2.6 million, less than 2% of their allowance, they were fined $7 million and had their wind tunnel development time cut. Lewis Hamilton noted, correctly, that even a $300,000 overspend in a tight championship like 2021 could theoretically have changed the final result. The system has teeth, even if critics argue they are not sharp enough.</p>
+
+            <p>What the cap has done most durably is make the franchise model credible. Predictable costs mean predictable investment cases. Owners are no longer running money pits; they are acquiring appreciating global brand platforms with a known annual operating ceiling. Every valuation chart you can draw for an F1 team points sharply upward from 2021 onwards.</p>
+
+            <div class="callout">
+                <p class="callout-label">2026 cost cap update</p>
+                <p>From 2026, the cap rises to $215 million. This is not a net increase in permissible spending. It reflects an expansion of what is now counted: new power unit regulations, capital investments, and HR costs that were previously exempt now fall under the calculation. The intent is tighter oversight, not looser spending.</p>
+            </div>
+
+            <!-- SECTION 5 -->
+            <h2 id="sponsorship">What sponsors actually buy</h2>
+
+            <p>When a company puts its logo on an F1 car, it is not buying a sticker. It is buying a global media distribution system.</p>
+
+            <p>F1 is broadcast in over 180 countries. Races attract hundreds of millions of live viewers. Sponsors appear on cars for up to two hours of continuous television coverage, on the fastest objects most viewers will ever watch in motion. When Carlos Sainz's Ferrari leads into a corner at 300 kilometres per hour, every brand on that car is a close-up in 180 countries simultaneously. No other sport delivers that specific combination of speed, reach, and premium audience demographics.</p>
+
+            <p>The return-on-investment data supports the pricing. Research shows sponsors of F1 teams earned an average of $822,157 in advertising value per championship point scored, with individual race wins generating up to $26 million in equivalent advertising value. A title sponsorship deal like Mastercard's with McLaren, reportedly around $100 million per year through the mid-2030s, delivers brand exposure that would cost multiples of that sum on conventional advertising channels.</p>
+
+            <h3>Technical Partnerships</h3>
+
+            <p>Not all sponsors are there for logos. Some are there for the technology itself.</p>
+
+            <p>Petronas and Mercedes is the defining example. The Malaysian state oil company became Mercedes's title sponsor and fuel partner. Petronas engineers work alongside Mercedes engineers. The fuels and lubricants developed for the race car are genuine products, adapted from competition for road use, and Petronas gets to say its petrol comes from the same programme that powered Lewis Hamilton to six world championships. That claim is worth billions in market positioning, not just name recognition.</p>
+
+            <p>Pirelli supplies all ten teams with identical tyres, not as a traditional sponsor but as the exclusive manufacturer. Every strategic conversation in every race is shaped by their products. In exchange, Pirelli gains unparalleled performance data and puts "Official Supplier to Formula 1" on every pack of road tyres sold worldwide.</p>
+
+            <p>Oracle and Red Bull. Atlassian and Williams, where project management software is genuinely integrated into the team's daily operations rather than simply applied to the nose cone. These partnerships work because F1 teams run some of the most data-intensive operations on earth. Every lap of every practice session generates terabytes of information. A software or technology company that can legitimately say it helps manage that data has a product demonstration worth far more than any conventional advertising campaign could deliver.</p>
+
+            <!-- SECTION 6 -->
+            <h2 id="fan-revenue">What fans contribute, and what they do not</h2>
+
+            <p>Here is something that surprises most people the first time they see it. Formula 1's business model is almost the inverse of traditional team sports.</p>
+
+            <p>In the NHL or Major League Baseball, tickets and gate receipts represent close to half of all revenue. Fans in seats are the primary paying customer, and the commercial model orbits around who turns up on match day. Formula 1 is different. Host cities pay F1 to come. Broadcasters pay for the rights to show it. Sponsors pay to be seen by the audience. Fans, the people who buy tickets, merchandise, and streaming subscriptions, generate a relatively small slice of the total pie.</p>
+
+            <p>This is not a weakness in the business model. It is a deliberate feature of it. In F1, fans are not the primary customer. They are the asset that makes every other customer willing to pay. Cities pay because fans will come. Broadcasters pay because fans will watch. Sponsors pay because fans will notice. Understanding this distinction explains why F1 can be financially dominant without the mass ticketing infrastructure of a league playing 82 home games a season.</p>
+
+            <div class="chart-container">
+                <p class="chart-label">Fan-Direct Revenue as a % of Total &mdash; Sport by Sport</p>
+                <p class="chart-sub">Approximate share of total revenue generated directly from fans: tickets, gate receipts, merchandise, and subscriptions. Sources: Sportico, Liberty Media annual report, and league financial filings.</p>
+                <div style="position:relative;width:100%;height:300px;">
+                    <canvas id="fanChart"></canvas>
+                </div>
+                <p class="chart-note">F1 estimate includes Las Vegas GP ticket revenue (directly promoted by F1), F1 TV subscriptions, Paddock Club hospitality, and merchandise. Race hosting fees paid by city promoters are excluded. NHL and MLB are gate-driven leagues. NFL centralises most revenue through broadcast and national sponsorship deals. Formula 1 sits at the extreme end of the broadcast-and-brand model.</p>
+            </div>
+
+            <p>The chart makes F1 look like an outlier. And it is, deliberately. A single Las Vegas Grand Prix weekend generated 1.8 billion social media impressions in 2023 and delivered $88 million in combined ticket, sponsorship, and hospitality revenue from one event. That is the logic: fewer matchdays, more commercial impact per event, much higher revenue per hour of broadcast.</p>
+
+            <p>F1 TV is the one area where Liberty is actively pushing to change this ratio. Direct fan subscriptions grow year on year, and the platform gives Liberty a relationship with fans that does not depend on a third-party broadcaster as intermediary. The business has historically undermonetised its direct fan relationship. That is changing.</p>
+
+            <!-- SECTION 7 -->
+            <h2 id="byd">The wildcard: what if BYD enters?</h2>
+
+            <p>This may be the most consequential story in motorsport right now, and it has nothing to do with the racing. According to Bloomberg, BYD, the Chinese electric vehicle company that overtook Tesla to become the world's largest EV seller in 2025, is actively exploring a Formula 1 entry.</p>
+
+            <p>The options reportedly on the table range from building a team from scratch to acquiring an existing one. Alpine, Renault's F1 team, has been named as a potential target, though Renault's CEO said publicly it is not for sale and reportedly rejected a $1.2 billion bid without serious negotiation.</p>
+
+            <p>The timing is not coincidental. F1 has just introduced sweeping new power unit regulations for 2026. The electrical component of each hybrid drivetrain has roughly doubled: the new motor-generator unit delivers 350kW to the rear wheels, meaning approximately 50% of a car's power now comes from the electric system. For a company like BYD, which designs and manufactures its own batteries, motors, and power electronics, this is not a foreign technology. It is their core business.</p>
+
+            <div class="pullquote">
+                <p>"The next step is to welcome a Chinese manufacturer. We already have a driver." — FIA President Mohammed Ben Sulayem, referring to reserve driver Guanyu Zhou.</p>
+            </div>
+
+            <p>The strategic logic for BYD is compelling. The company sold over 2.25 million battery-electric vehicles in 2025. It wants to be taken seriously in premium global markets, particularly Europe and Latin America, where it is expanding aggressively. Nothing accelerates that ambition faster than placing your badge on a car competing against Ferrari and McLaren in front of 500 million viewers. Mercedes used F1 to reclaim its engineering reputation after years of mediocre road products. BYD could use it to shed the label of "cheap EV maker" and position itself as a global performance brand.</p>
+
+            <p>The FIA wants this to happen. F1's leadership wants this to happen. China is the world's largest car market, and the championship has no Chinese constructor on the grid. That gap is embarrassing for a sport that calls itself a world championship.</p>
+
+            <p>But nothing has been filed. No formal application exists. BYD generated over $100 billion in revenue in 2025, so the $500 million annual cost of running a competitive F1 team represents less than 0.5% of turnover. The money is there. The question is whether BYD wants to spend eight to ten years losing races while learning a sport that rewards decades of institutional knowledge. Audi joined the grid in 2026 by acquiring Sauber and has been preparing since 2022. Even they are not expected to challenge for a championship in the near term. Watch this one closely.</p>
+
+            <!-- SECTION 8 -->
+            <h2 id="africa">The African dream, and why Lagos could make sense</h2>
+
+            <p>I want to spend a moment on this because it is personal.</p>
+
+            <p>Africa has not hosted a Formula 1 Grand Prix since 1993, when the South African Grand Prix at Kyalami was the last race on the calendar. That is 33 years. An entire generation of African motorsport fans has grown up without the sport coming near them. In a championship that calls itself a world championship and visits 21 countries across six continents, not one of those countries is on this continent.</p>
+
+            <p>That is beginning to change, slowly.</p>
+
+            <p>Nigeria has formally bid to host a Grand Prix, with the National Sports Commission pushing a proposal for a street circuit in Abuja. Separately, the Lagos State Government has signed an agreement with Circuits of Africa to develop an F1-standard race track. Rwanda's Development Board chief has said the country is "in the race to possibly hold a Formula One event here in 2029." South Africa has upgraded Kyalami's infrastructure with FIA approval, though a firm calendar deal remains elusive. Morocco has expressed interest. Multiple African countries are in motion at the same time.</p>
+
+            <p>F1's CEO Stefano Domenicali has acknowledged the gap publicly. Lewis Hamilton, who has been vocal about the sport's diversity problem for years, has pushed explicitly for a race on the continent. The FIA president has called Africa's absence from the calendar a problem to fix.</p>
+
+            <p>So what would a Lagos Grand Prix actually mean?</p>
+
+            <p>The commercial case is real. Lagos has a population of over 20 million people, a growing middle class, and a disproportionate influence on African popular culture, music, fashion, and business. A Grand Prix here would not be just a race. It would be a cultural event of a scale Nigeria has not seen in decades. The economic argument, based on tourism, hotel bookings, international media attention, and infrastructure investment, is the same argument that sold Baku, Jeddah, and Las Vegas on hosting races in places no one thought F1 would go.</p>
+
+            <p>The barriers deserve honest acknowledgement. F1 requires a Grade 1 FIA-certified circuit, which Lagos does not yet have. Building one costs hundreds of millions of dollars. Security and logistics for a global event at that scale require serious planning over several years. The hosting fee, likely somewhere between $30 and $50 million per year for a new market, requires either government backing, private investment, or a combination. None of these things are impossible. Rwanda is building from scratch and targeting 2029. Lagos could do the same.</p>
+
+            <div class="callout">
+                <p class="callout-label">What hosting a Grand Prix requires</p>
+                <p>A Grade 1 FIA-certified circuit, either permanent or temporary street circuit · An annual hosting fee of typically $30 to $50 million for new markets · Security, medical, and logistics infrastructure capable of handling 100,000-plus visitors per race day · Signed commercial agreements with the Formula One Group · Full FIA circuit inspection and approval.</p>
+                <p><strong>Rwanda</strong> is targeting 2029. <strong>Nigeria's</strong> National Sports Commission is in active discussions. <strong>Lagos</strong> has signed a circuit development agreement. Africa's return to the F1 calendar is no longer a question of whether. It is a question of when, and which city gets there first.</p>
+            </div>
+
+            <p>What I find genuinely exciting is not just the prospect of a race weekend. It is what the race would signal. When F1 went to Las Vegas in 2023 for the first time since 1982, it validated Las Vegas as a global entertainment capital. A Lagos Grand Prix would say something important about Africa: that this continent is now firmly inside the frame of one of the world's most commercially sophisticated sporting products. That matters beyond the spectacle itself.</p>
+
+            <!-- SECTION 9 -->
+            <h2 id="bigger-picture">The bigger picture</h2>
+
+            <p>Formula 1 in 2026 is a different animal to Formula 1 in 2010. Liberty Media turned a niche European motorsport into a global franchise with near-universal name recognition. Drive to Survive did not create that shift; it amplified what was already there. The real transformation was structural: predictable costs via the budget cap, credible governance, new markets, and a calendar that now spans six continents.</p>
+
+            <p>The franchise value of every team has multiplied accordingly. McLaren went from $400 million to $4.1 billion in fifteen years without a sustained period of dominance. Williams went from near-bankruptcy to over a billion dollars in value. Aston Martin was bought for under $100 million and valued at $1.3 billion five years later. These numbers should interest anyone who thinks about sport as a business, or as an asset class.</p>
+
+            <p>What makes F1 genuinely unusual as a commercial entity is this combination: global media reach without the cost of owning a stadium; a fixed-supply franchise system with ten slots and limited new entrants; a single commercial rights owner who can make decisions without committee; a calendar that can expand into new markets; and a product, speed, technology, and glamour, that translates across cultures in a way that American football, cricket, or even football struggle to match entirely.</p>
+
+            <p>The sport is not without contradictions. Racing cars burning fossil fuels at a time of climate urgency. Enormous wealth on display at a time of global anxiety about inequality. A calendar that visits authoritarian states in exchange for large hosting fees. These are fair criticisms, and F1's leadership answers them with varying degrees of conviction depending on the audience.</p>
+
+            <p>But if you want to understand how sport, media, technology, and global capital intersect in 2026, Formula 1 is one of the most instructive case studies available. It is not just fast cars. It never was.</p>
+
+            <p>And if Lagos becomes the next city to write that hosting cheque, it will not just be a great party. It will be confirmation that this continent is now firmly inside the frame of one of the world's most valuable entertainment products. I grew up in Lagos. That seems worth cheering for.</p>
+
+            <p style="font-size:0.78rem;color:var(--ink-faint);font-family:'DM Mono',monospace;letter-spacing:0.04em;margin-top:3em;padding-top:1.5em;border-top:1px solid var(--rule);">Sources: Liberty Media annual reports (2024, 2025) · Bloomberg · Sportico · Motorsport.com · Autosport · Motor Sport Magazine · Electrek · ThisDay Live Nigeria · Macrotrends / NASDAQ data. All financial figures in USD unless stated.</p>
+
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="article-sidebar">
+
+            <div class="sidebar-block">
+                <p class="sidebar-label">In this essay</p>
+                <ul class="toc-list">
+                    <li><a href="#who-owns">Who actually owns F1</a></li>
+                    <li><a href="#four-streams">Four revenue streams</a></li>
+                    <li><a href="#the-teams">The ten teams</a></li>
+                    <li><a href="#cost-cap">The cost cap</a></li>
+                    <li><a href="#sponsorship">What sponsors actually buy</a></li>
+                    <li><a href="#fan-revenue">Fan revenue vs other sports</a></li>
+                    <li><a href="#byd">The BYD wildcard</a></li>
+                    <li><a href="#africa">An African Grand Prix</a></li>
+                    <li><a href="#bigger-picture">The bigger picture</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-block sidebar-share-block">
+                <p class="sidebar-label">Share</p>
+                <div class="share-links">
+                    <a href="https://twitter.com/intent/tweet?text=The%20Business%20of%20Formula%201&url=https%3A%2F%2Folwtsn.cloud%2Ff1-business.html" class="share-link" target="_blank" rel="noopener">Twitter / X</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Folwtsn.cloud%2Ff1-business.html" class="share-link" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="/cdn-cgi/l/email-protection#59662a2c3b333c3a2d640e362b2d317c6b692b3c383d30373e7f3b363d20640d313c7c6b691b2c2a30373c2a2a7c6b69363f7c6b691f362b342c35387c6b69687c6b697c1c6b7c61697c606d7c6b69312d2d292a7c6a187c6b1f7c6b1f36352e2d2a37773a35362c3d7c6b1f3f68743b2c2a30373c2a2a77312d3435" class="share-link">Email a friend</a>
+                </div>
+            </div>
+
+            <div class="sidebar-block">
+                <p class="sidebar-label">About the author</p>
+                <p class="sidebar-author-name">Oluwatosin Raji</p>
+                <p class="sidebar-author-bio">Social commentator writing about markets, money, and the policy choices that affect millions of people.</p>
+                <a href="https://www.linkedin.com/in/oluwatosin-raji92/" target="_blank" class="sidebar-author-link">LinkedIn →</a>
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
+<footer style="border-top: 1px solid var(--rule); background: var(--paper);">
+    <div class="article-footer">
+        <a href="/" class="footer-back">← Back to all essays</a>
+        <p class="footer-copy">© 2026 Oluwatosin Raji</p>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const d = new Date();
+    const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('today-date').textContent = d.toLocaleDateString('en-GB', opts);
+</script>
+
+<script>
+(function() {
+    const inkFaint  = '#9c9690';
+    const inkLight  = '#5c574f';
+    const rule      = '#d4cfc7';
+    const accent    = '#b8360a';
+    const accentFill = 'rgba(184,54,10,0.06)';
+    const paperDark = '#ede9e2';
+
+    /* ── STOCK CHART ── */
+    new Chart(document.getElementById('stockChart'), {
+        type: 'line',
+        data: {
+            labels: [
+                'Jan 2017','Apr 2017','Jul 2017','Oct 2017',
+                'Jan 2018','Jul 2018','Jan 2019','Jul 2019',
+                'Jan 2020','Mar 2020','Jul 2020','Jan 2021',
+                'Jul 2021','Jan 2022','Jul 2022','Jan 2023',
+                'Jul 2023','Jan 2024','Jul 2024','Jan 2025',
+                'Jul 2025','Oct 2025','Mar 2026'
+            ],
+            datasets: [{
+                data: [
+                    25, 28, 32, 34,
+                    33, 31, 36, 42,
+                    38, 17, 36, 46,
+                    55, 62, 60, 68,
+                    73, 76, 82, 87,
+                    93, 99.5, 76
+                ],
+                borderColor: accent,
+                backgroundColor: accentFill,
+                borderWidth: 2,
+                pointRadius: 2.5,
+                pointBackgroundColor: accent,
+                pointHoverRadius: 5,
+                fill: true,
+                tension: 0.35
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1a1714',
+                    titleColor: inkFaint,
+                    bodyColor: '#f7f4ef',
+                    titleFont: { family: "'DM Mono', monospace", size: 10 },
+                    bodyFont: { family: "'DM Mono', monospace", size: 11 },
+                    callbacks: { label: ctx => ' $' + ctx.parsed.y.toFixed(2) }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: inkFaint, font: { family: "'DM Mono', monospace", size: 9 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 12 },
+                    grid: { color: rule }
+                },
+                y: {
+                    ticks: { color: inkFaint, font: { family: "'DM Mono', monospace", size: 10 }, callback: v => '$' + v },
+                    grid: { color: rule },
+                    min: 0, max: 115
+                }
+            }
+        }
+    });
+
+    /* ── FAN REVENUE CHART ── */
+    const sports = ['NHL', 'MLB', 'NBA', 'Premier\nLeague', 'NFL', 'Formula 1'];
+    const fanPct  = [52, 48, 36, 28, 26, 12];
+    const bgColors = sports.map((_, i) => i === 5 ? accent : paperDark);
+    const bdColors = sports.map((_, i) => i === 5 ? accent : rule);
+    const txtColors = sports.map((_, i) => i === 5 ? '#f7f4ef' : inkLight);
+
+    new Chart(document.getElementById('fanChart'), {
+        type: 'bar',
+        data: {
+            labels: ['NHL', 'MLB', 'NBA', 'Premier League', 'NFL', 'Formula 1'],
+            datasets: [{
+                data: fanPct,
+                backgroundColor: bgColors,
+                borderColor: bdColors,
+                borderWidth: 1,
+                borderRadius: 2
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1a1714',
+                    titleColor: inkFaint,
+                    bodyColor: '#f7f4ef',
+                    titleFont: { family: "'DM Mono', monospace", size: 10 },
+                    bodyFont: { family: "'DM Mono', monospace", size: 11 },
+                    callbacks: { label: ctx => ' ' + ctx.parsed.x + '% of total revenue' }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: inkFaint, font: { family: "'DM Mono', monospace", siz
