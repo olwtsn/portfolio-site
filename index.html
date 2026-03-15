@@ -559,7 +559,7 @@
                             Social commentator. I write about markets, money, and the policy choices that affect millions of people.
                         </p>
                         <div class="author-links" style="margin-top:12px;">
-                            <a href="mailto:olwtsnrj@gmail.com">Email</a>
+                            <a href="/cdn-cgi/l/email-protection#731c1f0407001d011933141e121a1f5d101c1e">Email</a>
                             <a href="https://www.linkedin.com/in/oluwatosin-raji92/" target="_blank">LinkedIn</a>
                         </div>
                     </div>
@@ -617,7 +617,7 @@
                     <div class="article-meta">
                         <span class="article-topic">Sport · Business</span>
                         <span class="article-dot"></span>
-                        <span class="article-date">February 2026</span>
+                        <span class="article-date">March 2026</span>
                     </div>
                     <a href="https://olwtsn.cloud/f1-business.html" class="article-title-sm">
                         The Business of Formula 1
@@ -657,12 +657,12 @@
                 <p class="newsletter-sub">No noise. Just a note when something new is worth reading.</p>
             </div>
             <div>
-                <div class="newsletter-form">
+                <div class="newsletter-form" id="newsletter-form">
                     <div class="newsletter-row">
-                        <input type="email" class="newsletter-input" placeholder="your@email.com">
-                        <button class="newsletter-btn">Subscribe</button>
+                        <input type="email" id="newsletter-email" class="newsletter-input" placeholder="your@email.com" autocomplete="email">
+                        <button class="newsletter-btn" id="newsletter-btn" onclick="submitToHubspot()">Subscribe</button>
                     </div>
-                    <p class="newsletter-note">No spam, ever. Unsubscribe at any time.</p>
+                    <p class="newsletter-note" id="newsletter-note">No spam, ever. Unsubscribe at any time.</p>
                 </div>
             </div>
         </section>
@@ -676,15 +676,85 @@
         </div>
         <ul class="footer-links">
             <li><a href="#essays">Essays</a></li>
-            <li><a href="mailto:olwtsnrj@gmail.com">Email</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#412e2d3635322f332b01262c20282d6f222e2c">Email</a></li>
             <li><a href="https://www.linkedin.com/in/oluwatosin-raji92/" target="_blank">LinkedIn</a></li>
         </ul>
     </footer>
+
 
     <script>
         const d = new Date();
         const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         document.getElementById('today-date').textContent = d.toLocaleDateString('en-US', opts);
+    </script>
+
+    <script>
+        // ── HUBSPOT FORM SUBMISSION ──────────────────────────────
+        // Replace these two values with your own from HubSpot
+        var HS_PORTAL_ID = '48147976';
+        var HS_FORM_GUID = '39b1e051-b0f6-43b7-93ff-f516dd4a9485';
+        // ─────────────────────────────────────────────────────────
+
+        function submitToHubspot() {
+            var emailInput = document.getElementById('newsletter-email');
+            var btn        = document.getElementById('newsletter-btn');
+            var note       = document.getElementById('newsletter-note');
+            var email      = emailInput.value.trim();
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                note.textContent = 'Please enter a valid email address.';
+                note.style.color = '#b8360a';
+                return;
+            }
+
+            btn.textContent     = 'Sending...';
+            btn.disabled        = true;
+            emailInput.disabled = true;
+
+            var endpoint = 'https://api.hsforms.com/submissions/v3/integration/submit/'
+                           + HS_PORTAL_ID + '/' + HS_FORM_GUID;
+
+            fetch(endpoint, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    fields:  [{ name: 'email', value: email }],
+                    context: { pageUri: window.location.href, pageName: document.title }
+                })
+            })
+            .then(function(res) {
+                if (res.ok) {
+                    document.getElementById('newsletter-form').innerHTML =
+                        '<p style="font-family:\'Playfair Display\',Georgia,serif;font-size:1.1rem;color:var(--ink);">'
+                        + 'You\'re in. I\'ll be in touch.</p>'
+                        + '<p style="font-family:\'DM Mono\',monospace;font-size:0.65rem;'
+                        + 'letter-spacing:0.08em;color:var(--ink-faint);margin-top:8px;">'
+                        + 'ADDED TO THE LIST</p>';
+                } else {
+                    btn.textContent     = 'Subscribe';
+                    btn.disabled        = false;
+                    emailInput.disabled = false;
+                    note.textContent    = 'Something went wrong. Please try again.';
+                    note.style.color    = '#b8360a';
+                }
+            })
+            .catch(function() {
+                btn.textContent     = 'Subscribe';
+                btn.disabled        = false;
+                emailInput.disabled = false;
+                note.textContent    = 'Something went wrong. Please try again.';
+                note.style.color    = '#b8360a';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var input = document.getElementById('newsletter-email');
+            if (input) {
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') submitToHubspot();
+                });
+            }
+        });
     </script>
 
 </body>
