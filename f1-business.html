@@ -849,37 +849,24 @@
     const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('today-date').textContent = d.toLocaleDateString('en-GB', opts);
 </script>
-
+ 
+ 
 <script>
 (function() {
-    const inkFaint  = '#9c9690';
-    const inkLight  = '#5c574f';
-    const rule      = '#d4cfc7';
-    const accent    = '#b8360a';
-    const accentFill = 'rgba(184,54,10,0.06)';
-    const paperDark = '#ede9e2';
-
-    /* ── STOCK CHART ── */
+    var inkFaint  = '#9c9690';
+    var inkLight  = '#5c574f';
+    var rule      = '#d4cfc7';
+    var accent    = '#b8360a';
+    var accentFill = 'rgba(184,54,10,0.06)';
+    var paperDark = '#ede9e2';
+ 
+    /* Stock chart */
     new Chart(document.getElementById('stockChart'), {
         type: 'line',
         data: {
-            labels: [
-                'Jan 2017','Apr 2017','Jul 2017','Oct 2017',
-                'Jan 2018','Jul 2018','Jan 2019','Jul 2019',
-                'Jan 2020','Mar 2020','Jul 2020','Jan 2021',
-                'Jul 2021','Jan 2022','Jul 2022','Jan 2023',
-                'Jul 2023','Jan 2024','Jul 2024','Jan 2025',
-                'Jul 2025','Oct 2025','Mar 2026'
-            ],
+            labels: ['Jan 2017','Apr 2017','Jul 2017','Oct 2017','Jan 2018','Jul 2018','Jan 2019','Jul 2019','Jan 2020','Mar 2020','Jul 2020','Jan 2021','Jul 2021','Jan 2022','Jul 2022','Jan 2023','Jul 2023','Jan 2024','Jul 2024','Jan 2025','Jul 2025','Oct 2025','Feb 2026'],
             datasets: [{
-                data: [
-                    25, 28, 32, 34,
-                    33, 31, 36, 42,
-                    38, 17, 36, 46,
-                    55, 62, 60, 68,
-                    73, 76, 82, 87,
-                    93, 99.5, 76
-                ],
+                data: [25,28,32,34,33,31,36,42,38,17,36,46,55,62,60,68,73,76,82,87,93,99.5,76],
                 borderColor: accent,
                 backgroundColor: accentFill,
                 borderWidth: 2,
@@ -899,36 +886,34 @@
                     backgroundColor: '#1a1714',
                     titleColor: inkFaint,
                     bodyColor: '#f7f4ef',
-                    titleFont: { family: "'DM Mono', monospace", size: 10 },
-                    bodyFont: { family: "'DM Mono', monospace", size: 11 },
-                    callbacks: { label: ctx => ' $' + ctx.parsed.y.toFixed(2) }
+                    callbacks: { label: function(ctx){ return ' $' + ctx.parsed.y.toFixed(2); } }
                 }
             },
             scales: {
                 x: {
-                    ticks: { color: inkFaint, font: { family: "'DM Mono', monospace", size: 9 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 12 },
+                    ticks: { color: inkFaint, font: { size: 9 }, maxRotation: 45, autoSkip: true, maxTicksLimit: 12 },
                     grid: { color: rule }
                 },
                 y: {
-                    ticks: { color: inkFaint, font: { family: "'DM Mono', monospace", size: 10 }, callback: v => '$' + v },
+                    ticks: { color: inkFaint, font: { size: 10 }, callback: function(v){ return '$' + v; } },
                     grid: { color: rule },
-                    min: 0, max: 115
+                    min: 0,
+                    max: 115
                 }
             }
         }
     });
-
-    /* ── FAN REVENUE CHART ── */
-    const sports = ['NHL', 'MLB', 'NBA', 'Premier\nLeague', 'NFL', 'Formula 1'];
-    const fanPct  = [52, 48, 36, 28, 26, 12];
-    const bgColors = sports.map((_, i) => i === 5 ? accent : paperDark);
-    const bdColors = sports.map((_, i) => i === 5 ? accent : rule);
-    const txtColors = sports.map((_, i) => i === 5 ? '#f7f4ef' : inkLight);
-
+ 
+    /* Fan revenue chart */
+    var fanLabels = ['NHL','MLB','NBA','Premier League','NFL','Formula 1'];
+    var fanPct    = [52, 48, 36, 28, 26, 12];
+    var bgColors  = fanLabels.map(function(_, i){ return i === 5 ? accent : paperDark; });
+    var bdColors  = fanLabels.map(function(_, i){ return i === 5 ? accent : rule; });
+ 
     new Chart(document.getElementById('fanChart'), {
         type: 'bar',
         data: {
-            labels: ['NHL', 'MLB', 'NBA', 'Premier League', 'NFL', 'Formula 1'],
+            labels: fanLabels,
             datasets: [{
                 data: fanPct,
                 backgroundColor: bgColors,
@@ -947,11 +932,22 @@
                     backgroundColor: '#1a1714',
                     titleColor: inkFaint,
                     bodyColor: '#f7f4ef',
-                    titleFont: { family: "'DM Mono', monospace", size: 10 },
-                    bodyFont: { family: "'DM Mono', monospace", size: 11 },
-                    callbacks: { label: ctx => ' ' + ctx.parsed.x + '% of total revenue' }
+                    callbacks: { label: function(ctx){ return ' ' + ctx.parsed.x + '% of total revenue'; } }
                 }
             },
             scales: {
                 x: {
-                    ticks: { color: inkFaint, font: { family: "'DM Mono', monospace", siz
+                    ticks: { color: inkFaint, font: { size: 10 }, callback: function(v){ return v + '%'; } },
+                    grid: { color: rule },
+                    min: 0,
+                    max: 65
+                },
+                y: {
+                    ticks: { color: inkLight, font: { size: 13 } },
+                    grid: { color: 'transparent' }
+                }
+            }
+        }
+    });
+})();
+</script>
